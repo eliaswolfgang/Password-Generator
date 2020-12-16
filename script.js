@@ -22,7 +22,7 @@ function writePassword() {
   var pwLength = parseInt(prompt("How many characters would you like?"));
   
   if (pwLength < 8 || pwLength >= 128 || pwLength === null || isNaN(pwLength) === true) {
-      alert("No password will be generated! Please select a password length no less than 8 and no greater than 128 characters.")
+      alert("No password will be generated! Please enter a number of characters (between 8 and 128) for your password.")
     } else if (pwLength >= 8 && pwLength <= 128) {
       alert("Your password will be " + pwLength + " characters long.");
         // Contained within this else if to properly nest confirms

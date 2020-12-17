@@ -31,22 +31,35 @@ function writePassword() {
         var numChoice = confirm("Would you like numbers?");
         var specCharChoice = confirm("Would you like special characters?");
         if (lowerCase === true) {
-          charOptions.push(...lettersArr)
-        }
+          charOptions.push(...lettersArr);
+          while (charOptions.length < pwLength) {
+            charOptions.push(...lettersArr)
+          }
+        } 
         if (upperCase === true) {
-          charOptions.push(...upperLetters)
+          charOptions.push(...upperLetters);
+          while (charOptions.length < pwLength) {
+            charOptions.push(...upperLetters)
+          }
         }
         if (numChoice === true) {
-          charOptions.push(...numbers)
+          charOptions.push(...numbers);
+          while (charOptions.length < pwLength) {
+            charOptions.push(...numbers)
+          }
         }
         if (specCharChoice === true) {
-          charOptions.push(...specChar)
+          charOptions.push(...specChar);
+          while (charOptions.length < pwLength) {
+            charOptions.push(...specChar)
+          }
         } 
         // Now our array of character options is fully built out. Account for jerks and pranksters, just in case...
         if (lowerCase == false && upperCase == false && numChoice == false && specCharChoice == false) {
           alert("No password will be generated! Please select at least one character type.")
         }
     }
+    
     // Logs to troubleshoot randomization, if needed
     console.log("---------------------");
     console.log(charOptions + " ---pre-shuffle");

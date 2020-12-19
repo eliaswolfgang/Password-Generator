@@ -8,7 +8,7 @@ function shuffleArray(array) {
       [array[i], array[j]] = [array[j], array[i]];
   }
 } 
-function writePassword() {
+function generatePassword() {
 // Character possibilites
   var lettersArr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
   var upperLetters = lettersArr.map(letter => letter.toUpperCase());
@@ -54,8 +54,14 @@ function writePassword() {
     // Slice our shuffled array to get our final password as an array
     let pwArray = charOptions.slice(0, pwLength);
     // And join to create a string version of the final password
-    let password = pwArray.join("");
-    // Finally, push our password string to the document's HTML
-    const passwordText = document.querySelector("#password");
-    passwordText.value = password;
+    return pwArray.join("");
+   
+}
+
+function writePassword() {
+
+   // Finally, push our password string to the document's HTML
+   let password = generatePassword();
+   const passwordText = document.querySelector("#password");
+   passwordText.value = password;
 }

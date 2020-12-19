@@ -59,7 +59,7 @@ function generatePassword() {
 }
 
 function writePassword() {
-  alert("Welcome! I'm going to help you generate a random password today. Please select the number of characters you would like you password to be.")
+  alert("Welcome! I'm going to help you generate a random password today.")
   // Finally, push our password string to the document's HTML
   const password = generatePassword();
   const passwordText = document.querySelector('#password');

@@ -18,15 +18,15 @@ function generatePassword() {
 
   // Get the user-preferred password length (8-128 characters)
   const pwLength = parseInt(prompt('Passwords must be between 8 and 128 characters. How many characters would you like?'));
-  if (pwLength < 8 || pwLength >= 128 || pwLength === null || isNaN(pwLength) === true) {
+  if (pwLength < 8 || pwLength > 128 || pwLength === null || isNaN(pwLength) === true) {
     alert('No password will be generated! Please enter a number of characters (between 8 and 128) for your password.');
-  } else if (pwLength >= 8 && pwLength <= 128) {
+  } else {
     alert(`Your password will be ${pwLength} characters long.`);
     // Confirm what characters the user would like to use
-    const lowerCase = confirm('Would you like lowercase letters?');
-    const upperCase = confirm('Would you like uppercase letters?');
-    const numChoice = confirm('Would you like numbers?');
-    const specCharChoice = confirm('Would you like special characters?');
+    const lowerCase = confirm('Are lowercase letters ok?');
+    const upperCase = confirm('Are uppercase letters ok?');
+    const numChoice = confirm('Are numbers ok?');
+    const specCharChoice = confirm('Are special characters ok?');
     // Function for building our character array based on user choices. Rest parameters used on the push methods to ensure iterability.
     function buildArr(prompt, arr) {
       if (prompt === true) {
@@ -45,8 +45,8 @@ function generatePassword() {
     if (lowerCase === false && upperCase === false && numChoice === false && specCharChoice === false) {
       alert('No password will be generated! Please select at least one character type.');
     }
-  }
-  console.log(`${charOptions}---unshuffled`);
+  
+  // console.log(`${charOptions}---unshuffled`);
   // then call our shuffle function to randomize the array
   shuffleArray(charOptions);
   // console.log("---------------------");
@@ -55,9 +55,11 @@ function generatePassword() {
   const pwArray = charOptions.slice(0, pwLength);
   // And join to create a string version of the final password
   return pwArray.join('');
+ } 
 }
 
 function writePassword() {
+  alert("Welcome! I'm going to help you generate a random password today. Please select the number of characters you would like you password to be.")
   // Finally, push our password string to the document's HTML
   const password = generatePassword();
   const passwordText = document.querySelector('#password');

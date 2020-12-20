@@ -6,7 +6,7 @@ Through a series of prompts, users are given the option to include lowercase let
 The generated password is passed to the simple HTML of the page and is fully deployable. All the user needs to do is copy and paste!
 
 ## Specs & Testing
-The randomization of this password generator was achieved using the updated ES6 Durstenfeld algorithm,an optimized version of the Fisher-Yates shuffle. 
+The randomization of this password generator was achieved using the updated ES6 Durstenfeld algorithm, an optimized version of the Fisher-Yates shuffle. 
 This shuffle takes an existing array and assigns an iterable i variable to each index; a j index is specified randomly using Math.floor() and Math.random(), and the i and j indeces are subsequently "switched":
 the i index of the array becomes the j index and the j index becomes the i, etc.
 

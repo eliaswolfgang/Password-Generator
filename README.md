@@ -16,6 +16,6 @@ This code was tested using eslint on the command line, and no errors are logged 
 This application is hosted by GitHub Pages and deployed at https://eliaswolfgang.github.io/Password-Generator/.
 
 Screenshots of the deployed application:
-<img src="./screenshots/screenshot1" width = 100%>
-<img src="./screenshots/screenshot2" width = 100%>
-<img src="./screenshots/screenshot3" width = 100%>
+<img src="./screenshots/screenshot1.png" width = 100%>
+<img src="./screenshots/screenshot2.png" width = 100%>
+<img src="./screenshots/screenshot3.png" width = 100%>

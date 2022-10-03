@@ -1,29 +1,41 @@
 // Assignment Code
 const generateBtn = document.querySelector('#generate');
 generateBtn.addEventListener('click', writePassword);
-// Durstenfeld shuffle algorithm for randomization
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
+
 function generatePassword() {
-  // Function for building our character array based on user choices. Spread operators used on the push methods to ensure array iterability.
-  function buildArr(prompt, arr) {
-    if (prompt) {
-      charOptions.push(...arr);
+  
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
     }
+    return array;
+  }
+  // Function for building our character array based on user choices. Spread operators used on the push methods to ensure array iterability.
+  function buildArr(prompts, arrays) {
+    let charOptions = [];
+    prompts.forEach((prompt, i) => {
+      if (prompt) {
+        charOptions.push(arrays[i]);
+      }
+    });
+    return charOptions;
   }
 
-  function checkPassword(password, array) {
-    // Check for at least one character from each selected character type
-    for (let i = 0; i < array.length; i++) {
-      if (password.includes(array[i])) {
-        return true;
+  function buildPassword(optionsArrays, length) {
+    let password = '';
+    let i = 0;
+    while (password.length < length) {
+      let newChar = optionsArrays[i][Math.floor(Math.random() * optionsArrays[i].length)];
+      password = password + newChar;
+      if (i !== optionsArrays.length - 1) {
+        i++;
+      } else {
+        i = 0;
       }
     }
-    return false;
+
+    return password;
   }
 
   // Character possibilites
@@ -57,7 +69,7 @@ function generatePassword() {
   ];
   const upperLetters = lettersArr.map((letter) => letter.toUpperCase());
   const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
-  const specChar = [
+  const specChars = [
     '!',
     '#',
     '$',
@@ -82,7 +94,7 @@ function generatePassword() {
     '}',
     '~',
   ];
-  const charOptions = [];
+  let charOptions = [];
 
   // Get the user-preferred password length (8-128 characters)
   const pwLength = parseInt(
@@ -100,36 +112,24 @@ function generatePassword() {
     const lowerCase = confirm('Would you like lowercase letters?');
     const upperCase = confirm('Would you like uppercase letters?');
     const numChoice = confirm('Would you like numbers?');
-    const specCharChoice = confirm('Would you like special characters?');
+    const specCharsChoice = confirm('Would you like special characters?');
 
     // Account for all false case
-    if (!lowerCase && !upperCase && !numChoice && !specCharChoice) {
+    if (!lowerCase && !upperCase && !numChoice && !specCharsChoice) {
       alert(
         'No password will be generated! Please select at least one character type.'
       );
     } else {
       // Build our character array
-      buildArr(lowerCase, lettersArr);
-      buildArr(upperCase, upperLetters);
-      buildArr(numChoice, numbers);
-      buildArr(specCharChoice, specChar);
+      charOptions = buildArr(
+        [lowerCase, upperCase, numChoice, specCharsChoice],
+        [lettersArr, upperLetters, numbers, specChars]
+      );
     }
+    const shuffledOptions = shuffleArray(charOptions);
+    let password = buildPassword(shuffledOptions, pwLength);
 
-    // console.log(`${charOptions}---unshuffled`);
-    // then call our shuffle function to randomize the array
-    shuffleArray(charOptions);
-    // console.log("---------------------");
-    // console.log(charOptions + " ---shuffled");
-    // Slice our shuffled array to get our final password as an array
-
-    const pwArray = charOptions.slice(0, pwLength);
-    // And join to create a string version of the final password
-    let finalPassword = pwArray.join('');
-    if (!checkPassword(finalPassword, charOptions)) {
-      finalPassword = generatePassword();
-    } else {
-      return finalPassword;
-    }
+    return password;
   }
 }
 
